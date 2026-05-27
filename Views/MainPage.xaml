@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FoodieApp.ViewModels"
+             xmlns:model="clr-namespace:FoodieApp.Models"
+             x:Class="FoodieApp.Views.MainPage"
+             x:DataType="vm:RecipesViewModel"
+             Title="{Binding Title}"
+             SemanticProperties.Description="Recipe list page. Search and browse food recipes.">
+    <Grid RowDefinitions="Auto,Auto,*">
+        <VerticalStackLayout Grid.Row="0" Padding="16,12,16,0" Spacing="4">
+            <SearchBar Placeholder="Search recipes..."
+                       Text="{Binding SearchText}"
+                       SearchCommand="{Binding SearchCommand}"
+                       SemanticProperties.Hint="Type a recipe name to search"
+                       AutomationId="SearchBar" />
+            <Label Text="{Binding SearchValidationMessage}"
+                   Style="{StaticResource ValidationLabel}"
+                   IsVisible="{Binding IsValidationVisible}"
+                   AutomationId="ValidationLabel" />
+        </VerticalStackLayout>
+        <Label Grid.Row="1" Text="Shake your device for a random recipe!"
+               Style="{StaticResource CaptionLabel}"
+               HorizontalTextAlignment="Center" Margin="0,8,0,0"
+               SemanticProperties.Description="Shake the device to load a random recipe" />
+        <RefreshView Grid.Row="2" IsRefreshing="{Binding IsBusy}"
+                     Command="{Binding LoadRecipesCommand}"
+                     RefreshColor="{StaticResource Primary}">
+            <CollectionView ItemsSource="{Binding Recipes}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnRecipeSelected"
+                            EmptyView="No recipes found. Try a different search."
+                            SemanticProperties.Description="List of recipes">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Recipe">
+                        <Frame Style="{StaticResource CardFrame}" Margin="16,6,16,6">
+                            <Grid ColumnDefinitions="90,*" ColumnSpacing="12">
+                                <Image Grid.Column="0" Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill" HeightRequest="80" WidthRequest="80"
+                                       SemanticProperties.Description="{Binding Name}"
+                                       BackgroundColor="{StaticResource Border}" />
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                    <Label Text="{Binding Name}" Style="{StaticResource TitleLabel}"
+                                           FontSize="16" MaxLines="2" LineBreakMode="TailTruncation"
+                                           SemanticProperties.HeadingLevel="Level3" />
+                                    <Label Text="{Binding Category}" Style="{StaticResource CaptionLabel}" />
+                                    <Label Text="{Binding Summary}"  Style="{StaticResource CaptionLabel}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <ActivityIndicator Grid.Row="2" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                           VerticalOptions="Center" HorizontalOptions="Center" />
+    </Grid>
+</ContentPage>

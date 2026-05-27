@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:FoodieApp.Views"
+       x:Class="FoodieApp.AppShell"
+       SemanticProperties.Description="Foodie app navigation shell">
+    <TabBar>
+        <Tab Title="Home" Icon="home.png" SemanticProperties.Description="Home tab - browse and search recipes">
+            <ShellContent Route="MainPage" ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>
+        <Tab Title="Scan" Icon="camera.png" SemanticProperties.Description="Scan tab - photograph a food item">
+            <ShellContent Route="ScanPage" ContentTemplate="{DataTemplate views:ScanPage}" />
+        </Tab>
+        <Tab Title="Nearby" Icon="location.png" SemanticProperties.Description="Nearby tab - find your location">
+            <ShellContent Route="LocationPage" ContentTemplate="{DataTemplate views:LocationPage}" />
+        </Tab>
+        <Tab Title="Settings" Icon="settings.png" SemanticProperties.Description="Settings tab - accessibility options">
+            <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate views:SettingsPage}" />
+        </Tab>
+    </TabBar>
+</Shell>

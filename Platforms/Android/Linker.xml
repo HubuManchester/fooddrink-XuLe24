@@ -1,0 +1,6 @@
+﻿<linker>
+  <assembly fullname="FoodieApp">
+    <type fullname="FoodieApp.MainActivity" preserve="all" />
+    <type fullname="FoodieApp.MainApplication" preserve="all" />
+  </assembly>
+</linker>

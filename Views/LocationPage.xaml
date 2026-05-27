@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FoodieApp.ViewModels"
+             x:Class="FoodieApp.Views.LocationPage"
+             x:DataType="vm:LocationViewModel"
+             Title="{Binding Title}"
+             SemanticProperties.Description="Location page. Shows your current GPS location.">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label Text="Your Location" Style="{StaticResource HeadlineLabel}"
+                   SemanticProperties.HeadingLevel="Level1" />
+            <Label Text="Find food experiences near you by detecting your current location."
+                   Style="{StaticResource BodyLabel}" />
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="{Binding LocationText}" Style="{StaticResource BodyLabel}"
+                           HorizontalTextAlignment="Center"
+                           SemanticProperties.Description="{Binding LocationText}" />
+                    <Grid ColumnDefinitions="*,*" IsVisible="{Binding HasLocation}" ColumnSpacing="12">
+                        <Frame Grid.Column="0" Style="{StaticResource CardFrame}" Padding="10">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Latitude" Style="{StaticResource CaptionLabel}" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding LatitudeText}" Style="{StaticResource BodyLabel}"
+                                       FontSize="14" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame Grid.Column="1" Style="{StaticResource CardFrame}" Padding="10">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Longitude" Style="{StaticResource CaptionLabel}" HorizontalTextAlignment="Center" />
+                                <Label Text="{Binding LongitudeText}" Style="{StaticResource BodyLabel}"
+                                       FontSize="14" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+            <Button Text="Get My Location" Style="{StaticResource PrimaryButton}"
+                    Command="{Binding GetLocationCommand}" IsEnabled="{Binding IsNotBusy}"
+                    SemanticProperties.Hint="Tap to detect your current GPS location" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

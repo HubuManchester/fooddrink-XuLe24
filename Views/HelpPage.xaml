@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FoodieApp.Views.HelpPage"
+             Title="Help"
+             SemanticProperties.Description="Help page explaining how to use the Foodie app.">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label Text="How to Use Foodie" Style="{StaticResource HeadlineLabel}"
+                   SemanticProperties.HeadingLevel="Level1" />
+            <Label Text="Welcome to Foodie - your personal recipe companion." Style="{StaticResource BodyLabel}" />
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Searching Recipes" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Type any ingredient or dish name into the search bar on the Home tab. You need at least 2 characters to search." Style="{StaticResource BodyLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Shake for a Random Recipe" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Shake your device while on the Home tab and Foodie will pick a random recipe for you." Style="{StaticResource BodyLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Reading a Recipe" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Tap any recipe card to open its detail page. Use Previous and Next to move between steps. Tap Read Step to have the app read the step aloud." Style="{StaticResource BodyLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Saving Favourites" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Tap Favourite on any recipe detail page to save it. Tap again to remove it." Style="{StaticResource BodyLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Scanning Food" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Go to the Scan tab and tap Take Photo to open your camera. Or tap Choose from Gallery." Style="{StaticResource BodyLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Your Location" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Go to the Nearby tab and tap Get My Location. On an emulator, set a simulated location in the emulator settings." Style="{StaticResource BodyLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Settings and Accessibility" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Toggle Dark Mode to reduce eye strain. Drag the Font Size slider to increase or decrease text (WCAG 1.4.4). All controls support TalkBack and Narrator screen readers (WCAG 4.1.2)." Style="{StaticResource BodyLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}" BackgroundColor="{StaticResource PrimaryLight}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Accessibility Standards (WCAG 2.1)" Style="{StaticResource TitleLabel}"
+                           TextColor="{StaticResource PrimaryDark}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="1.1.1 - All images have text alternatives." Style="{StaticResource CaptionLabel}" />
+                    <Label Text="1.3.1 - Information conveyed by semantic labels." Style="{StaticResource CaptionLabel}" />
+                    <Label Text="1.4.3 - Contrast ratio meets minimum standard." Style="{StaticResource CaptionLabel}" />
+                    <Label Text="1.4.4 - Text can be resized up to 200%." Style="{StaticResource CaptionLabel}" />
+                    <Label Text="2.1.1 - All functionality available without colour." Style="{StaticResource CaptionLabel}" />
+                    <Label Text="4.1.2 - Name, role, value provided for all UI components." Style="{StaticResource CaptionLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

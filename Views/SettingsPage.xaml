@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FoodieApp.ViewModels"
+             x:Class="FoodieApp.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Title="{Binding Title}"
+             SemanticProperties.Description="Settings page for accessibility and display preferences.">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Label Text="Settings" Style="{StaticResource HeadlineLabel}"
+                   SemanticProperties.HeadingLevel="Level1" />
+            <Frame Style="{StaticResource CardFrame}" BackgroundColor="{StaticResource PrimaryLight}">
+                <Label Text="These settings improve accessibility and are applied immediately."
+                       Style="{StaticResource BodyLabel}" TextColor="{StaticResource PrimaryDark}" />
+            </Frame>
+            <Label Text="Display" Style="{StaticResource TitleLabel}"
+                   SemanticProperties.HeadingLevel="Level2" />
+            <Frame Style="{StaticResource CardFrame}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label Text="Dark Mode" Style="{StaticResource BodyLabel}" FontAttributes="Bold" />
+                        <Label Text="Reduces eye strain in low-light environments (WCAG 1.4.3)"
+                               Style="{StaticResource CaptionLabel}" />
+                    </VerticalStackLayout>
+                    <Switch Grid.Column="1" IsToggled="{Binding IsDarkMode}"
+                            OnColor="{StaticResource Primary}"
+                            Toggled="OnDarkModeToggled"
+                            SemanticProperties.Hint="Toggle dark mode for the application"
+                            AutomationId="DarkModeSwitch" />
+                </Grid>
+            </Frame>
+            <Label Text="Accessibility" Style="{StaticResource TitleLabel}"
+                   SemanticProperties.HeadingLevel="Level2" />
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Font Size" Style="{StaticResource BodyLabel}" FontAttributes="Bold" />
+                    <Label Text="Adjust text size to improve readability (WCAG 1.4.4)"
+                           Style="{StaticResource CaptionLabel}" />
+                    <Label Text="Sample text - this is how recipes will look."
+                           FontSize="{Binding FontSize}"
+                           TextColor="{AppThemeBinding Light={StaticResource TextPrimary}, Dark={StaticResource TextPrimaryDark}}"
+                           SemanticProperties.Description="Font size preview" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                        <Label Grid.Column="0" Text="A" FontSize="12"
+                               TextColor="{StaticResource TextSecondary}" VerticalOptions="Center" />
+                        <Slider Grid.Column="1" Minimum="12" Maximum="24"
+                                Value="{Binding FontSize}"
+                                MinimumTrackColor="{StaticResource Primary}"
+                                MaximumTrackColor="{StaticResource Border}"
+                                ThumbColor="{StaticResource Primary}"
+                                DragCompleted="OnFontSizeDragCompleted"
+                                SemanticProperties.Hint="Drag to change font size between 12 and 24"
+                                AutomationId="FontSizeSlider" />
+                        <Label Grid.Column="2" Text="A" FontSize="24"
+                               TextColor="{StaticResource TextSecondary}" VerticalOptions="Center" />
+                    </Grid>
+                    <Label Text="{Binding FontSize, StringFormat='Current size: {0:F0}'}"
+                           Style="{StaticResource CaptionLabel}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding FontValidationMessage}" Style="{StaticResource ValidationLabel}"
+                           IsVisible="{Binding IsFontValidationVisible}" />
+                    <Button Text="Apply Font Size" Style="{StaticResource PrimaryButton}"
+                            Command="{Binding SaveFontSizeCommand}"
+                            SemanticProperties.Hint="Save and apply the selected font size" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CardFrame}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Screen Reader Support" Style="{StaticResource BodyLabel}" FontAttributes="Bold" />
+                    <Label Text="All UI elements include semantic descriptions for TalkBack (Android) and Narrator (Windows). (WCAG 1.1.1, 4.1.2)"
+                           Style="{StaticResource CaptionLabel}" />
+                </VerticalStackLayout>
+            </Frame>
+            <Button Text="Reset to Defaults" Style="{StaticResource SecondaryButton}"
+                    Command="{Binding ResetDefaultsCommand}"
+                    SemanticProperties.Hint="Reset all settings to their default values"
+                    Margin="0,8,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
