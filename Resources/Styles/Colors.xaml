@@ -12,8 +12,9 @@
     <Color x:Key="CardBackgroundDark">#3A3A3C</Color>
     <Color x:Key="TextPrimary">#1A1A1A</Color>
     <Color x:Key="TextPrimaryDark">#F2F2F7</Color>
-    <Color x:Key="TextSecondary">#6B6B6B</Color>
-    <Color x:Key="TextSecondaryDark">#AEAEB2</Color>
+    <!-- WCAG AA: ≥4.5:1 on white / dark backgrounds -->
+    <Color x:Key="TextSecondary">#595959</Color>
+    <Color x:Key="TextSecondaryDark">#C7C7CC</Color>
     <Color x:Key="Success">#34C759</Color>
     <Color x:Key="Warning">#FF9500</Color>
     <Color x:Key="Error">#FF3B30</Color>

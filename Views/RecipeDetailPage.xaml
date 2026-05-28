@@ -7,15 +7,17 @@
              Title="{Binding Title}"
              SemanticProperties.Description="Recipe detail page with ingredients and cooking steps.">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Help" Clicked="OnHelpClicked" SemanticProperties.Hint="Open help page" />
+        <ToolbarItem Text="Help" Clicked="OnHelpClicked"
+                     SemanticProperties.Hint="Open the help page" />
     </ContentPage.ToolbarItems>
     <ScrollView>
         <VerticalStackLayout Spacing="0">
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
-                               Margin="0,40,0,0" HorizontalOptions="Center" />
+                               Margin="0,40,0,0" HorizontalOptions="Center"
+                               SemanticProperties.Description="Loading recipe details" />
             <VerticalStackLayout IsVisible="{Binding IsNotBusy}" Spacing="0">
                 <Image Source="{Binding Recipe.ImageUrl}" Aspect="AspectFill" HeightRequest="240"
-                       SemanticProperties.Description="{Binding Recipe.Name}" />
+                       SemanticProperties.Description="{Binding Recipe.Name, StringFormat='Photo of {0}'}" />
                 <VerticalStackLayout Padding="20,16" Spacing="20">
                     <VerticalStackLayout Spacing="6">
                         <Label Text="{Binding Recipe.Name}" Style="{StaticResource HeadlineLabel}"
@@ -25,15 +27,17 @@
                             <Frame Padding="8,4" CornerRadius="8" HasShadow="False"
                                    BackgroundColor="{StaticResource PrimaryLight}">
                                 <Label Text="{Binding Recipe.Category}" TextColor="White"
-                                       FontSize="13" FontAttributes="Bold" />
+                                       FontSize="{DynamicResource CaptionFontSize}" FontAttributes="Bold" />
                             </Frame>
                             <Frame Padding="8,4" CornerRadius="8" HasShadow="False"
                                    BackgroundColor="{StaticResource Border}">
-                                <Label Text="{Binding Recipe.Area}" FontSize="13"
+                                <Label Text="{Binding Recipe.Area}"
+                                       FontSize="{DynamicResource CaptionFontSize}"
                                        TextColor="{StaticResource TextSecondary}" />
                             </Frame>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
+
                     <VerticalStackLayout Spacing="8">
                         <Label Text="Ingredients" Style="{StaticResource TitleLabel}"
                                SemanticProperties.HeadingLevel="Level2" />
@@ -48,7 +52,20 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,8,0,0">
+                            <Button Grid.Column="0" Text="Read Aloud"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Command="{Binding ReadAloudCommand}"
+                                    IsEnabled="{Binding IsNotBusy}"
+                                    SemanticProperties.Hint="Read the recipe name and ingredients aloud" />
+                            <Button Grid.Column="1" Text="Stop"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding StopReadingCommand}"
+                                    IsVisible="{Binding IsSpeaking}"
+                                    SemanticProperties.Hint="Stop reading aloud" />
+                        </Grid>
                     </VerticalStackLayout>
+
                     <VerticalStackLayout Spacing="12">
                         <Label Text="Cooking Steps" Style="{StaticResource TitleLabel}"
                                SemanticProperties.HeadingLevel="Level2" />
@@ -61,33 +78,21 @@
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                                     <Button Grid.Column="0" Text="Previous"
                                             Style="{StaticResource SecondaryButton}"
-                                            Clicked="OnPreviousStepClicked"
+                                            Command="{Binding PreviousStepCommand}"
                                             IsEnabled="{Binding CanGoBack}"
-                                            SemanticProperties.Hint="Go to previous step" />
+                                            SemanticProperties.Hint="Go to the previous cooking step" />
                                     <Button Grid.Column="1" Text="Next"
                                             Style="{StaticResource PrimaryButton}"
-                                            Clicked="OnNextStepClicked"
+                                            Command="{Binding NextStepCommand}"
                                             IsEnabled="{Binding CanGoForward}"
-                                            SemanticProperties.Hint="Go to next step" />
+                                            SemanticProperties.Hint="Go to the next cooking step" />
                                 </Grid>
                             </VerticalStackLayout>
                         </Frame>
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
-                            <Button Grid.Column="0" Text="Read Step"
-                                    Style="{StaticResource PrimaryButton}"
-                                    Clicked="OnSpeakClicked"
-                                    IsEnabled="{Binding IsNotBusy}"
-                                    SemanticProperties.Hint="Read the current step aloud" />
-                            <Button Grid.Column="1" Text="Stop"
-                                    Style="{StaticResource SecondaryButton}"
-                                    Clicked="OnStopSpeakingClicked"
-                                    IsVisible="{Binding IsSpeaking}"
-                                    SemanticProperties.Hint="Stop reading aloud" />
-                            <Button Grid.Column="2" Text="Favourite"
-                                    Style="{StaticResource SecondaryButton}"
-                                    Clicked="OnFavouriteClicked"
-                                    SemanticProperties.Hint="Save or remove from favourites" />
-                        </Grid>
+                        <Button Text="Favourite"
+                                Style="{StaticResource SecondaryButton}"
+                                Command="{Binding ToggleFavouriteCommand}"
+                                SemanticProperties.Hint="Save or remove this recipe from favourites" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>
             </VerticalStackLayout>

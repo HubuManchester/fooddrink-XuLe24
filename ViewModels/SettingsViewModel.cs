@@ -1,35 +1,54 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FoodieApp.Services;
+
 namespace FoodieApp.ViewModels;
+
 public partial class SettingsViewModel : BaseViewModel
 {
     private readonly SettingsService _settingsService;
-    [ObservableProperty] private string _fontValidationMessage = string.Empty;
-    [ObservableProperty] private bool _isFontValidationVisible;
-    [ObservableProperty] private double _fontSize;
+
+    public IReadOnlyList<string> FontSizeOptions { get; } =
+        ["Normal", "Large", "Extra Large"];
+
     [ObservableProperty] private bool _isDarkMode;
+    [ObservableProperty] private string _selectedFontSizeOption = "Normal";
+    [ObservableProperty] private double _previewFontSize = 16;
+
     public SettingsViewModel(SettingsService settingsService)
     {
-        _settingsService = settingsService; Title = "Settings";
-        _fontSize = _settingsService.FontSize; _isDarkMode = _settingsService.IsDarkMode;
+        _settingsService = settingsService;
+        Title = "Settings";
+        _isDarkMode = settingsService.IsDarkMode;
+        _selectedFontSizeOption = SettingsService.GetDisplayName(settingsService.FontSizePreset);
+        _previewFontSize = settingsService.GetFontSizeValue();
     }
-    [RelayCommand]
-    public void SaveFontSize()
+
+    partial void OnIsDarkModeChanged(bool value)
     {
-        if (FontSize < SettingsService.MinFontSize || FontSize > SettingsService.MaxFontSize)
-        { FontValidationMessage = $"Font size must be between {SettingsService.MinFontSize} and {SettingsService.MaxFontSize}."; IsFontValidationVisible = true; return; }
-        IsFontValidationVisible = false; _settingsService.FontSize = FontSize;
+        _settingsService.IsDarkMode = value;
+        _settingsService.ApplyTheme();
+    }
+
+    partial void OnSelectedFontSizeOptionChanged(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return;
+
+        var preset = SettingsService.FromDisplayName(value);
+        _settingsService.FontSizePreset = preset;
+        PreviewFontSize = _settingsService.GetFontSizeValue();
+        _settingsService.ApplyFontSize();
         HapticFeedback.Perform(HapticFeedbackType.Click);
     }
-    [RelayCommand]
-    public void ToggleDarkMode() { _settingsService.IsDarkMode = IsDarkMode; _settingsService.ApplyTheme(); }
+
     [RelayCommand]
     public void ResetDefaults()
     {
-        FontSize = SettingsService.DefaultFontSize; IsDarkMode = false;
-        _settingsService.FontSize = FontSize; _settingsService.IsDarkMode = IsDarkMode;
-        _settingsService.ApplyTheme(); IsFontValidationVisible = false;
+        IsDarkMode = false;
+        SelectedFontSizeOption = "Normal";
+        _settingsService.IsDarkMode = false;
+        _settingsService.FontSizePreset = FontSizePreset.Normal;
+        _settingsService.ApplyAll();
         HapticFeedback.Perform(HapticFeedbackType.LongPress);
     }
 }

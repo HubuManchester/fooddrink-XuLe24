@@ -18,13 +18,13 @@
             <Frame Style="{StaticResource CardFrame}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Shake for a Random Recipe" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
-                    <Label Text="Shake your device while on the Home tab and Foodie will pick a random recipe for you." Style="{StaticResource BodyLabel}" />
+                    <Label Text="Shake your device while on the Home tab and Foodie will vibrate and pick a random recipe for you." Style="{StaticResource BodyLabel}" />
                 </VerticalStackLayout>
             </Frame>
             <Frame Style="{StaticResource CardFrame}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Reading a Recipe" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
-                    <Label Text="Tap any recipe card to open its detail page. Use Previous and Next to move between steps. Tap Read Step to have the app read the step aloud." Style="{StaticResource BodyLabel}" />
+                    <Label Text="Tap any recipe card to open its detail page. Tap Read Aloud to hear the recipe name and ingredients spoken aloud. Tap Stop to cancel. Use Previous and Next to move between cooking steps." Style="{StaticResource BodyLabel}" />
                 </VerticalStackLayout>
             </Frame>
             <Frame Style="{StaticResource CardFrame}">
@@ -48,7 +48,7 @@
             <Frame Style="{StaticResource CardFrame}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Settings and Accessibility" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
-                    <Label Text="Toggle Dark Mode to reduce eye strain. Drag the Font Size slider to increase or decrease text (WCAG 1.4.4). All controls support TalkBack and Narrator screen readers (WCAG 4.1.2)." Style="{StaticResource BodyLabel}" />
+                    <Label Text="Toggle Dark Mode to switch between light and dark themes. Choose Normal, Large, or Extra Large font size to improve readability (WCAG 1.4.4). All controls support TalkBack and Narrator screen readers (WCAG 4.1.2)." Style="{StaticResource BodyLabel}" />
                 </VerticalStackLayout>
             </Frame>
             <Frame Style="{StaticResource CardFrame}" BackgroundColor="{StaticResource PrimaryLight}">

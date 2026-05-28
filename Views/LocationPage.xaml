@@ -35,7 +35,8 @@
                     </Grid>
                 </VerticalStackLayout>
             </Frame>
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                               SemanticProperties.Description="Detecting location" />
             <Button Text="Get My Location" Style="{StaticResource PrimaryButton}"
                     Command="{Binding GetLocationCommand}" IsEnabled="{Binding IsNotBusy}"
                     SemanticProperties.Hint="Tap to detect your current GPS location" />

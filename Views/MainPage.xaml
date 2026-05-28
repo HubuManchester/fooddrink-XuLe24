@@ -37,7 +37,7 @@
                             <Grid ColumnDefinitions="90,*" ColumnSpacing="12">
                                 <Image Grid.Column="0" Source="{Binding ImageUrl}"
                                        Aspect="AspectFill" HeightRequest="80" WidthRequest="80"
-                                       SemanticProperties.Description="{Binding Name}"
+                                       SemanticProperties.Description="{Binding Name, StringFormat='Recipe photo: {0}'}"
                                        BackgroundColor="{StaticResource Border}" />
                                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
                                     <Label Text="{Binding Name}" Style="{StaticResource TitleLabel}"
@@ -53,6 +53,7 @@
             </CollectionView>
         </RefreshView>
         <ActivityIndicator Grid.Row="2" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
-                           VerticalOptions="Center" HorizontalOptions="Center" />
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                           SemanticProperties.Description="Loading recipes" />
     </Grid>
 </ContentPage>
