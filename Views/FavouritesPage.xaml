@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FoodieApp.ViewModels"
+             xmlns:model="clr-namespace:FoodieApp.Models"
+             x:Class="FoodieApp.Views.FavouritesPage"
+             x:Name="ThisPage"
+             x:DataType="vm:FavouritesViewModel"
+             Title="{Binding Title}"
+             SemanticProperties.Description="Favourites page showing saved recipes.">
+    <Grid>
+        <RefreshView IsRefreshing="{Binding IsBusy}"
+                     Command="{Binding LoadFavouritesCommand}"
+                     RefreshColor="{StaticResource Primary}">
+            <CollectionView ItemsSource="{Binding Favourites}"
+                            SelectionMode="None"
+                            SemanticProperties.Description="List of favourite recipes">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="40" Spacing="12"
+                                         VerticalOptions="Center"
+                                         IsVisible="{Binding IsEmpty}">
+                        <Label Text="No favourites yet"
+                               Style="{StaticResource TitleLabel}"
+                               HorizontalTextAlignment="Center"
+                               SemanticProperties.HeadingLevel="Level2" />
+                        <Label Text="Tap the heart on any recipe to save it here."
+                               Style="{StaticResource CaptionLabel}"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Recipe">
+                        <SwipeView Margin="16,6">
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Text="Remove"
+                                               BackgroundColor="{StaticResource Error}"
+                                               Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.RemoveFavouriteCommand}"
+                                               CommandParameter="{Binding .}"
+                                               SemanticProperties.Hint="Remove this recipe from favourites" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Frame Style="{StaticResource CardFrame}" Padding="0" HasShadow="False">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.OpenRecipeCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="90,*" ColumnSpacing="12" Padding="16">
+                                    <Image Grid.Column="0" Source="{Binding ImageUrl}"
+                                           Aspect="AspectFill" HeightRequest="80" WidthRequest="80"
+                                           SemanticProperties.Description="{Binding Name, StringFormat='Recipe photo: {0}'}"
+                                           BackgroundColor="{StaticResource Border}" />
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                        <Label Text="{Binding Name}" Style="{StaticResource TitleLabel}"
+                                               MaxLines="2" LineBreakMode="TailTruncation"
+                                               SemanticProperties.HeadingLevel="Level3" />
+                                        <Label Text="{Binding Category}" Style="{StaticResource CaptionLabel}" />
+                                        <Label Text="{Binding Summary}" Style="{StaticResource CaptionLabel}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                           SemanticProperties.Description="Loading favourites" />
+    </Grid>
+</ContentPage>

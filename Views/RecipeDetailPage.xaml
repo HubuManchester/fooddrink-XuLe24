@@ -70,7 +70,11 @@
                         <Label Text="Cooking Steps" Style="{StaticResource TitleLabel}"
                                SemanticProperties.HeadingLevel="Level2" />
                         <Label Text="{Binding StepProgress}" Style="{StaticResource CaptionLabel}"
-                               SemanticProperties.Description="{Binding StepProgress}" />
+                               SemanticProperties.Description="{Binding StepProgress}"
+                               IsVisible="{Binding HasSteps}" />
+                        <Label Text="No cooking steps available for this recipe."
+                               Style="{StaticResource CaptionLabel}"
+                               IsVisible="{Binding HasNoSteps}" />
                         <Frame Style="{StaticResource CardFrame}">
                             <VerticalStackLayout Spacing="12">
                                 <Label Text="{Binding CurrentStep}" Style="{StaticResource BodyLabel}"
@@ -89,10 +93,39 @@
                                 </Grid>
                             </VerticalStackLayout>
                         </Frame>
-                        <Button Text="Favourite"
-                                Style="{StaticResource SecondaryButton}"
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Button Grid.Column="0" Text="Read Steps"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Command="{Binding ReadStepsCommand}"
+                                    IsEnabled="{Binding IsNotBusy}"
+                                    SemanticProperties.Hint="Read the current cooking step aloud" />
+                            <Button Grid.Column="1" Text="Stop"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Command="{Binding StopReadingCommand}"
+                                    IsVisible="{Binding IsSpeaking}"
+                                    SemanticProperties.Hint="Stop reading aloud" />
+                        </Grid>
+                        <Button Text="{Binding FavouriteButtonText}"
                                 Command="{Binding ToggleFavouriteCommand}"
-                                SemanticProperties.Hint="Save or remove this recipe from favourites" />
+                                CornerRadius="12"
+                                FontAttributes="Bold"
+                                FontSize="{DynamicResource BaseFontSize}"
+                                Padding="16,12"
+                                SemanticProperties.Hint="{Binding FavouriteButtonHint}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsFavourite}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="BorderWidth" Value="0" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsFavourite}" Value="False">
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                    <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+                                    <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BorderWidth" Value="1.5" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                     </VerticalStackLayout>
                 </VerticalStackLayout>
             </VerticalStackLayout>

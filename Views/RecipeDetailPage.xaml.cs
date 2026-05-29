@@ -17,9 +17,7 @@ public partial class RecipeDetailPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        try   { await _viewModel.LoadRecipeAsync(); }
-        catch (HttpRequestException) { await ErrorHelper.ShowNetworkErrorAsync(this); }
-        catch (Exception ex)         { await ErrorHelper.ShowUnexpectedErrorAsync(this, ex); }
+        await _viewModel.LoadRecipeCommand.ExecuteAsync(null);
     }
 
     protected override async void OnDisappearing()

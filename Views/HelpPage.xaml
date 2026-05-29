@@ -24,13 +24,13 @@
             <Frame Style="{StaticResource CardFrame}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Reading a Recipe" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
-                    <Label Text="Tap any recipe card to open its detail page. Tap Read Aloud to hear the recipe name and ingredients spoken aloud. Tap Stop to cancel. Use Previous and Next to move between cooking steps." Style="{StaticResource BodyLabel}" />
+                    <Label Text="Tap any recipe card to open its detail page. Tap Read Aloud to hear the recipe name and ingredients. Tap Read Steps to hear the current cooking step. Tap Stop to cancel. Use Previous and Next to move between steps." Style="{StaticResource BodyLabel}" />
                 </VerticalStackLayout>
             </Frame>
             <Frame Style="{StaticResource CardFrame}">
                 <VerticalStackLayout Spacing="8">
                     <Label Text="Saving Favourites" Style="{StaticResource TitleLabel}" SemanticProperties.HeadingLevel="Level2" />
-                    <Label Text="Tap Favourite on any recipe detail page to save it. Tap again to remove it." Style="{StaticResource BodyLabel}" />
+                    <Label Text="Tap Favourite on any recipe detail page to save it. View all saved recipes on the Favourites tab. Swipe left on a favourite to remove it." Style="{StaticResource BodyLabel}" />
                 </VerticalStackLayout>
             </Frame>
             <Frame Style="{StaticResource CardFrame}">

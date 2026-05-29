@@ -14,6 +14,9 @@
         <Tab Title="Nearby" Icon="location.png" SemanticProperties.Description="Nearby tab - find your location">
             <ShellContent Route="LocationPage" ContentTemplate="{DataTemplate views:LocationPage}" />
         </Tab>
+        <Tab Title="Favourites" Icon="heart.png" SemanticProperties.Description="Favourites tab - view saved recipes">
+            <ShellContent Route="FavouritesPage" ContentTemplate="{DataTemplate views:FavouritesPage}" />
+        </Tab>
         <Tab Title="Settings" Icon="settings.png" SemanticProperties.Description="Settings tab - accessibility options">
             <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate views:SettingsPage}" />
         </Tab>

@@ -1,13 +1,12 @@
-﻿using FoodieApp.Services;
 using FoodieApp.ViewModels;
 
 namespace FoodieApp.Views;
 
-public partial class LocationPage : ContentPage
+public partial class FavouritesPage : ContentPage
 {
-    private readonly LocationViewModel _viewModel;
+    private readonly FavouritesViewModel _viewModel;
 
-    public LocationPage(LocationViewModel viewModel)
+    public FavouritesPage(FavouritesViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
@@ -17,6 +16,6 @@ public partial class LocationPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _viewModel.GetLocationCommand.ExecuteAsync(null);
+        await _viewModel.LoadFavouritesCommand.ExecuteAsync(null);
     }
 }
